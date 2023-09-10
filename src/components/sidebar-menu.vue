@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-expanded">
-
+        
     </div>
 </template>
 

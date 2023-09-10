@@ -1,9 +1,44 @@
 <template>
-    <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, provident possimus nulla quisquam neque, quibusdam quod labore atque consequuntur iste repellendus illo, quam reprehenderit minima mollitia blanditiis reiciendis. Culpa, ducimus.
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, natus. Magnam quo voluptate itaque omnis et corporis possimus, in molestiae recusandae provident quae sit neque dolores saepe dolorem placeat temporibus?
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet minima illo architecto ex, dolore quisquam nemo, mollitia odio dolores laudantium est sit, ab cum alias iure quasi repellat magnam. Quam!
-    </div>
+    <div class="d-flex align-center flex-column">
+    <div class="text-subtitle-2">With props</div>
+
+    <v-card
+      width="400"
+      title="This is a title"
+      subtitle="This is a subtitle"
+      text="This is content"
+    ></v-card>
+
+    <div class="mt-4 text-subtitle-2">With slots</div>
+
+    <v-card width="400">
+      <template v-slot:title>
+        This is a title
+      </template>
+
+      <template v-slot:subtitle>
+        This is a subtitle
+      </template>
+
+      <template v-slot:text>
+        This is content
+      </template>
+    </v-card>
+
+    <div class="mt-4 text-subtitle-2">With markup</div>
+
+    <v-card width="400">
+      <v-card-item>
+        <v-card-title>This is a title</v-card-title>
+
+        <v-card-subtitle>This is a subtitle</v-card-subtitle>
+      </v-card-item>
+
+      <v-card-text>
+        This is content
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
