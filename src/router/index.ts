@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import MasterMenu from '../views/layout/master-menu.vue';
+import EstagioObrigatorioPage from '../views/estagio-obrigatorio.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: MasterMenu,
+      children:[
+        {
+          path:'/estagio/obrigatorio',
+          name:'estagioObrigatorio',
+          component: EstagioObrigatorioPage
+        }
+      ]
     },
     {
       path: '/about',
