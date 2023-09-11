@@ -6,15 +6,15 @@
             <headerLayout/>
             <estagioObrigatorio></estagioObrigatorio>
         </div>
-        <bottomBarMobile/>
+        <bottombarNav/>
     </div>
 </template>
 
 <script lang="ts" setup>
+    import bottombarNav from "../../components/mobile/bottombar-nav.vue";
     import sidebarMenu from "../../components/sidebar-menu.vue";
     import headerLayout from "../../components/header-layout.vue";
     import estagioObrigatorio from "../estagio-obrigatorio.vue";
-    import bottomBarMobile from "../../components/mobile/bottom-bar.vue";
 
     function isMobile(): boolean {
         return window.innerWidth < 768
