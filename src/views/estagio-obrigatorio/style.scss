@@ -1,0 +1,6 @@
+@import '../../assets/scss/buttons';
+
+.btn {
+
+    @include button-submit
+}

@@ -1,0 +1,15 @@
+.master-page{
+    display: flex;
+    width: 100%; 
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.content{
+    height: 100vh;
+    width: 100%;
+    flex-grow: 1;
+    display: flex; 
+    flex-direction: column; 
+    overflow-y: auto;
+}

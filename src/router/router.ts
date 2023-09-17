@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MasterMenu from '../views/layout/master-menu.vue';
-import EstagioObrigatorioPage from '../views/estagio-obrigatorio.vue'
+import MasterMenu from '../views/layout/master-menu/master-menu.vue';
+import EstagioObrigatorioPage from '../views/estagio-obrigatorio/estagio-obrigatorio.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

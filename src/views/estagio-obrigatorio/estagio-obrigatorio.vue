@@ -32,11 +32,15 @@
         <v-card-title>This is a title</v-card-title>
 
         <v-card-subtitle>This is a subtitle</v-card-subtitle>
+        <button class="btn">
+        aqui está
+      </button>
       </v-card-item>
 
       <v-card-text>
         This is content
       </v-card-text>
+      
     </v-card>
   </div>
 </template>
@@ -45,6 +49,6 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style src="./style.scss" lang="scss" scoped>
 
 </style>
