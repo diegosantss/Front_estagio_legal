@@ -1,54 +1,50 @@
 <template>
-    <div class="d-flex align-center flex-column">
-    <div class="text-subtitle-2">With props</div>
+  <div class="d-flex align-center flex-column">
+  <div class="text-subtitle-2">With props</div>
 
-    <v-card
-      width="400"
-      title="This is a title"
-      subtitle="This is a subtitle"
-      text="This is content"
-    ></v-card>
+  <v-card
+    width="400"
+    title="This is a title"
+    subtitle="This is a subtitle"
+    text="This is content"
+  ></v-card>
 
-    <div class="mt-4 text-subtitle-2">With slots</div>
+  <div class="mt-4 text-subtitle-2">With slots</div>
 
-    <v-card width="400">
-      <template v-slot:title>
-        This is a title
-      </template>
+  <v-card width="400">
+    <template v-slot:title>
+      This is a title
+    </template>
 
-      <template v-slot:subtitle>
-        This is a subtitle
-      </template>
+    <template v-slot:subtitle>
+      This is a subtitle
+    </template>
 
-      <template v-slot:text>
-        This is content
-      </template>
-    </v-card>
+    <template v-slot:text>
+      This is content
+    </template>
+  </v-card>
 
-    <div class="mt-4 text-subtitle-2">With markup</div>
+  <div class="mt-4 text-subtitle-2">With markup</div>
 
-    <v-card width="400">
-      <v-card-item>
-        <v-card-title>This is a title</v-card-title>
+  <v-card width="400">
+    <v-card-item>
+      <v-card-title>This is a title</v-card-title>
 
-        <v-card-subtitle>This is a subtitle</v-card-subtitle>
-        <button class="btn">
-        aqui está
-      </button>
-      </v-card-item>
+      <v-card-subtitle>This is a subtitle</v-card-subtitle>
+    </v-card-item>
 
-      <v-card-text>
-        This is content
-      </v-card-text>
-      
-    </v-card>
-  </div>
+    <v-card-text>
+      This is content
+    </v-card-text>
+  </v-card>
+</div>
 </template>
 
 <script lang="ts" setup>
 
 </script>
 
-<style src="./style.scss" lang="scss" scoped>
+<style lang="scss" scoped>
 
 </style>
