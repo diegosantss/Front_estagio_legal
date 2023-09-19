@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "material-design-icons-iconfont": "^6.7.0",
     "pinia": "^2.1.6",
     "sass": "^1.66.1",
     "vue": "^3.3.4",
