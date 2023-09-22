@@ -12,6 +12,10 @@ const router = createRouter({
       component: MasterMenu,
       children:[
         {
+          path: '', // Rota vazia
+          redirect: 'estagio/obrigatorio', // Redirecionar para a rota 'estagio/obrigatorio'
+        },
+        {
           path:'/estagio/obrigatorio',
           name:'estagioObrigatorio',
           component: EstagioObrigatorioPage

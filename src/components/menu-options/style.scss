@@ -19,6 +19,25 @@ li p{
 
 }
 
-.teste{
-    max-width: 200px;
+li{
+    list-style: none;
+    display: flex;
 }
+
+.icone{
+    color: #fff;
+}
+
+.teste{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
