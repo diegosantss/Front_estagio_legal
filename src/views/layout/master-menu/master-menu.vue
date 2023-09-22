@@ -55,7 +55,7 @@
 
       <v-footer
     class="text-center d-flex flex-column"
-    color="#078640"
+    color="#f3f3f5"
     >
       <div>
         <v-btn

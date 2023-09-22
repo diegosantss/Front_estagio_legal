@@ -23,9 +23,10 @@
 
               <v-col
                 cols="12"
-                md="4"
+                md="2"
               >
                 <v-text-field
+                  type="number"
                   :counter="10"
                   label="Matricula"
                   hide-details
@@ -34,9 +35,10 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="2"
               >
                 <v-text-field
+                  type="number"
                   :counter="10"
                   label="CPF"
                   required
@@ -66,9 +68,10 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
+                  type="number"
                   :counter="10"
                   label="Celular"
                   required
@@ -97,9 +100,10 @@
 
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
+                  type="number"
                   :counter="10"
                   label="CNPJ"
                   hide-details
@@ -108,9 +112,10 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="2"
               >
                 <v-text-field
+                  type="number"
                   :counter="10"
                   label="CEP"
                   required
@@ -119,7 +124,7 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
                   label="Bairro"
@@ -129,7 +134,7 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
                   :counter="10"
@@ -140,7 +145,7 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="1"
               >
                 <v-text-field
                   :counter="10"
@@ -187,7 +192,7 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
                   :counter="10"
@@ -211,7 +216,7 @@
               </v-col>
               <v-col
                 cols="12"
-                md="4"
+                md="3"
               >
                 <v-text-field
                   :counter="10"
@@ -229,11 +234,12 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      md="4"
+                      md="3"
                     >
-                      <v-text-field
+                      <v-text-field 
+                        type="date"
                         :counter="10"
-                        label="Nome"
+                        label="Inicio de Estágio"
                         required
                         hide-details
                       ></v-text-field>
@@ -241,57 +247,86 @@
 
                     <v-col
                       cols="12"
-                      md="4"
+                      md="3"
                     >
                       <v-text-field
+                        type="date"
                         :counter="10"
-                        label="Matricula"
+                        label="Término de Estágio"
                         hide-details
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      md="4"
+                      md="2"
                     >
                       <v-text-field
+                        type="time"
                         :counter="10"
-                        label="CPF"
+                        label="Horario Inicial"
                         required
                         hide-details
                       ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      md="4"
+                      md="2"
                     >
                       <v-text-field
-                        label="Curso"
+                        type="time"
+                        label="Horario final"
                         hide-details
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      md="4"
+                      md="2"
                     >
                       <v-text-field
+                        type="number"
                         :counter="10"
-                        label="Email"
+                        label="Jornada Semanal"
                         required
                         hide-details
                       ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      md="4"
+                      md="3"
                     >
                       <v-text-field
+                        type="number"
                         :counter="10"
-                        label="Celular"
+                        label="Bolsa auxílio (R$)"
                         required
                         hide-details
                       ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="3"
+                    >
+                      <v-text-field
+                        type="number"
+                        :counter="10"
+                        label="Auxilio Transporte (R$)"
+                        required
+                        hide-details
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="11"
+                    >
+                      <v-textarea
+                        :counter="10"
+                        label="Plano de Atividades de Estágio"
+                        placeholder="1-&#10;2-&#10;3-&#10;4-&#10;5-"
+                        required
+                        hide-details
+                      ></v-textarea>
                     </v-col>
                     
                   </v-row>
