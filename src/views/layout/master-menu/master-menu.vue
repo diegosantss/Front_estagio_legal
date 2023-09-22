@@ -7,7 +7,7 @@
     </div>
     
     <div v-else>
-      <v-navigation-drawer :width="200">
+      <v-navigation-drawer :width="200" permanent>
         <sidebarMenu></sidebarMenu>
       </v-navigation-drawer>
     </div>

@@ -10,26 +10,25 @@
       <v-btn>
         <v-icon>mdi-home</v-icon>
 
-        <span class="span-button">home</span>
+        <router-link to="/estagio/obrigatorio" class="span-button">home</router-link>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-heart</v-icon>
+        <v-icon>mdi-file</v-icon>
 
-        <span class="span-button">Inicio de Estágio</span>
+        <router-link to="/estagio/naoobrigatorio" class="span-button">Inicio de Estágio</router-link>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-map-marker</v-icon>
+        <v-icon>mdi-calendar</v-icon>
 
         <span class="span-button">Fim de Estágio</span>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-history</v-icon>
+        <v-icon>mdi-update</v-icon>
 
-        <span class="span-button">Acompanhar</span>
-        <span class="span-button">Processos</span>
+        <span class="span-button">Acompanhar Processos</span>
       </v-btn>
 
     </v-bottom-navigation>
@@ -37,22 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 const value = ref(1);
-
-const sheet = ref(false);
-const tiles = reactive([
-      { img: 'keep.png', title: 'Keep' },
-        { img: 'inbox.png', title: 'Inbox' },
-        { img: 'hangouts.png', title: 'Hangouts' },
-        { img: 'messenger.png', title: 'Messenger' },
-        { img: 'google.png', title: 'Google+' },
-]);
-
 </script>
 
 <style lang="scss" scoped>
  .span-button{
+  max-width: 4.4rem;
   font-size: 0.6rem;
+  text-decoration: none;
+  color: black;
  }
 </style>
