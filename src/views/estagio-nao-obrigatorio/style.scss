@@ -1,0 +1,28 @@
+@import'../../assets/scss/colors.scss';
+@import'../../assets/scss/buttons.scss';
+
+
+.title{
+padding-top: 20px;
+padding-bottom: 20px;
+border-bottom: 2px solid #979996;
+margin: 0 30px;
+}
+
+.title1 {
+color: #858796;
+text-align: center;
+}
+
+.title2 {
+    color: #858796;
+    text-align: left;
+    margin: 0 30px;
+
+}
+
+.btn {
+    align-items: center;
+    margin: 0 110px;
+    @include button-submit
+}

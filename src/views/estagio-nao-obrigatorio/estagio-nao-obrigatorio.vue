@@ -1,55 +1,312 @@
 <template>
-   <v-card
-    class="mx-auto"
-    max-width="344"
-  >
-    <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-      height="200px"
-      cover
-    ></v-img>
+  <div class="main">
+    <div class="title">
+      <h1 class="title1">Formulário de Solicitação Do Termo de Compromisso de Estágio (TCE)</h1>
+    </div>
+    <div class="form">
+      <v-form>
+        <div class="aluno">
+          <h1 class="title2">Aluno:</h1>
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Nome"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
 
-    <v-card-title>
-      Top western road trips
-    </v-card-title>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Matricula"
+                  hide-details
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="CPF"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  label="Curso"
+                  hide-details
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Email"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Celular"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              
+            </v-row>
+          </v-container>
+        </div>
+        <div class="Concedente">
+          <h1 class="title2">Concedente:</h1>
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Razão Social"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
 
-    <v-card-subtitle>
-      1,000 miles of wonder
-    </v-card-subtitle>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="CNPJ"
+                  hide-details
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="CEP"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  label="Bairro"
+                  hide-details
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Cidade"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="UF"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Endereço"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Email"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              
+            </v-row>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Representante Legal"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Função"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Supervisor"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+              >
+                <v-text-field
+                  :counter="10"
+                  label="Cargo"
+                  required
+                  hide-details
+                ></v-text-field>
+              </v-col>
+            </v-row>        
+          </v-container>
+        </div>
+        <div class="Condicoes">
+              <h1 class="title2">Condições do Estágio:</h1>
+                <v-container>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        :counter="10"
+                        label="Nome"
+                        required
+                        hide-details
+                      ></v-text-field>
+                    </v-col>
 
-    <v-card-actions>
-      <v-btn
-        color="orange-lighten-2"
-        variant="text"
-      >
-        Explore
-      </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        @click="show = !show"
-      ></v-btn>
-    </v-card-actions>
-
-    <v-expand-transition>
-      <div v-show="show">
-        <v-divider></v-divider>
-
-        <v-card-text>
-          I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-        </v-card-text>
-      </div>
-    </v-expand-transition>
-  </v-card>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        :counter="10"
+                        label="Matricula"
+                        hide-details
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        :counter="10"
+                        label="CPF"
+                        required
+                        hide-details
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        label="Curso"
+                        hide-details
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        :counter="10"
+                        label="Email"
+                        required
+                        hide-details
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <v-text-field
+                        :counter="10"
+                        label="Celular"
+                        required
+                        hide-details
+                      ></v-text-field>
+                    </v-col>
+                    
+                  </v-row>
+                </v-container>
+        </div>
+        <v-btn class="btn">Enviar</v-btn>
+      </v-form>
+    </div>
+</div>
 </template>
-
 <script lang="ts" setup>
   import { ref } from 'vue';
   const show = ref(false);
 </script>
 
-<style lang="scss" scoped>
+<style src="./style.scss" lang="scss" scoped>
 
 </style>
