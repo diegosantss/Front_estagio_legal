@@ -1,51 +1,48 @@
 <template>
-  
+  <v-layout class="overflow-visible" style="height: 56px;">
     <v-bottom-navigation
       v-model="value"
       active
       color="teal"
       class="bottom-navigation"
     >
+    
       <v-btn>
-        <v-icon>mdi-history</v-icon>
+        <v-icon>mdi-home</v-icon>
 
-        Recents
+        <span class="span-button">home</span>
       </v-btn>
 
       <v-btn>
         <v-icon>mdi-heart</v-icon>
 
-        Favorites
+        <span class="span-button">Inicio de Estágio</span>
       </v-btn>
 
       <v-btn>
         <v-icon>mdi-map-marker</v-icon>
 
-        <span>Nearby</span>
+        <span class="span-button">Fim de Estágio</span>
       </v-btn>
 
       <v-btn>
-        <v-icon>mdi-map-marker</v-icon>
+        <v-icon>mdi-history</v-icon>
 
-        <span>Nearby</span>
+        <span class="span-button">Acompanhar</span>
+        <span class="span-button">Processos</span>
       </v-btn>
 
-      <v-btn>
-        <v-icon>mdi-map-marker</v-icon>
-
-        <span>Nearby</span>
-      </v-btn>
     </v-bottom-navigation>
-  
+  </v-layout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 const value = ref(1);
 
-const sheet = ref(false); 
+const sheet = ref(false);
 const tiles = reactive([
-        { img: 'keep.png', title: 'Keep' },
+      { img: 'keep.png', title: 'Keep' },
         { img: 'inbox.png', title: 'Inbox' },
         { img: 'hangouts.png', title: 'Hangouts' },
         { img: 'messenger.png', title: 'Messenger' },
@@ -55,4 +52,7 @@ const tiles = reactive([
 </script>
 
 <style lang="scss" scoped>
+ .span-button{
+  font-size: 0.6rem;
+ }
 </style>
