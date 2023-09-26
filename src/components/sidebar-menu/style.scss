@@ -20,3 +20,26 @@
     width: 2.4rem;
     height: 4rem;
 }
+
+.sidebar{
+    color: #fff;
+    background-color: #078640;
+}
+
+.header-sidebar{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+.footer-sidebar{
+    padding: 0.4rem;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    border-top: 2px solid #ffffff83;
+}
+
+.expand-control-btn{
+    background-color: #5d7f5d;
+}
