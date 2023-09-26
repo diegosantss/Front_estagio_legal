@@ -7,9 +7,38 @@
     </div>
     
     <div v-else>
-      <v-navigation-drawer :width="200" permanent>
-        <sidebarMenu></sidebarMenu>
+      <v-navigation-drawer
+        class="sidebar"
+        v-model="drawer"
+        :rail="rail"
+        permanent
+        @click="rail = false"
+      >
+        
+      <div class="header-sidebar">
+        <img src="../../../assets/Logo-IFPA.png" class="logo-ifpa" alt="">
+      </div>
+      
+      <template v-slot:append>
+        <div class="footer-sidebar">
+          <v-btn
+            variant="text"
+            :icon=setaMenu
+            @click.stop="rail = !rail"
+          ></v-btn>
+        </div>
+      </template>
+        
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+        </v-list>
       </v-navigation-drawer>
+      <!-- <sidebarMenu></sidebarMenu> -->
     </div>
 
       <v-app-bar class="border-b">
@@ -88,11 +117,23 @@
     import bottombarNav from "../../../components/mobile/bottombar-nav.vue";
     import sidebarMenu from "../../../components/sidebar-menu/sidebar-menu.vue";
     import headerLayout from "../../../components/header-layout/header-layout.vue";
-    import { ref, onMounted, onBeforeUnmount, reactive } from 'vue';
+    import { ref, onMounted, onBeforeUnmount, reactive, watch } from 'vue';
+
+    const drawer = ref(true);
+    const rail = ref(true);
+    const setaMenu = ref('mdi-chevron-right');
 
     const isDrawerOpen = ref(false)
 
     const isSmallScreen = ref(false);
+
+    watch(rail,(novovalor,valorAntigo)=>{
+      if(rail.value === false){
+        setaMenu.value = 'mdi-chevron-left';
+      }else{
+        setaMenu.value = 'mdi-chevron-right';
+      }
+    });
 
     const icons = reactive([
     'mdi-facebook',

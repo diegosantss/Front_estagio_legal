@@ -13,3 +13,24 @@
     flex-direction: column; 
     overflow-y: auto;
 }
+
+.logo-ifpa{
+    width: 2.4rem;
+    height: 4rem;
+}
+
+.sidebar{
+    background-color: #078640;
+}
+
+.header-sidebar{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+.footer-sidebar{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
