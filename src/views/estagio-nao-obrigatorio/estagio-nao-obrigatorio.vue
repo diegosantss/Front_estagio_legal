@@ -234,7 +234,18 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      md="3"
+                      md="4"
+                    >
+                      <v-radio-group inline 
+                      label="Tipo de Estágio"
+                      >
+                      <v-radio label="Obrigatório" value="1"></v-radio>
+                      <v-radio label="Não-Obrigatório" value="2"></v-radio>
+                    </v-radio-group>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="2"
                     >
                       <v-text-field 
                         type="date"
@@ -247,7 +258,7 @@
 
                     <v-col
                       cols="12"
-                      md="3"
+                      md="2"
                     >
                       <v-text-field
                         type="date"
@@ -318,7 +329,7 @@
                     </v-col>
                     <v-col
                       cols="12"
-                      md="11"
+                      md="12"
                     >
                       <v-textarea
                         :counter="10"

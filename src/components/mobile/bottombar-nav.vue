@@ -28,7 +28,7 @@
       <v-btn>
         <v-icon>mdi-update</v-icon>
 
-        <span class="span-button">Acompanhar Processos</span>
+        <router-link to="/acompanhar/processos" class="span-button">Acompanhar processos</router-link>
       </v-btn>
 
     </v-bottom-navigation>
