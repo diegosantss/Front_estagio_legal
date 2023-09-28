@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MasterMenu from '../views/layout/master-menu/master-menu.vue';
 import EstagioObrigatorioPage from '../views/estagio-obrigatorio/estagio-obrigatorio.vue'
 import EstagioNaoObrigatorioPage from '../views/estagio-nao-obrigatorio/estagio-nao-obrigatorio.vue';
-import AconpanharProcessosDex from '../views/acompanhar-processos/visao-dex/acompanhar-processos.vue';
+import AcompanharProcessosDex from '../views/acompanhar-processos/visao-dex/acompanhar-processos.vue';
+import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +30,12 @@ const router = createRouter({
         {
           path:'/acompanhar/processos',
           name:'acompanharProcessos',
-          component: AconpanharProcessosDex
+          component: AcompanharProcessosDex
+        },
+        {
+          path:'/Termo/Compromisso',
+          name:'termoDeCompromisso',
+          component: TermoDeCompromisso
         }
       ]
     },
