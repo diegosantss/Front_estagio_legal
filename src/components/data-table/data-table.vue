@@ -1,93 +1,13 @@
 <template>
     <div class="teste">
-        <div class="table-menu">
-            <div class="show items">
-                show
-                <v-menu>
-                    <template v-slot:activator="{ props }">
-                        <v-btn color="#078640" v-bind="props">
-                            10
-                        </v-btn>
-                    </template>
-                    <v-list>
-                        <v-list-item v-for="(item, index) in showOptions" :key="index" :value="index">
-                            <v-list-item-title>{{ item }}</v-list-item-title>
-                        </v-list-item>
-                    </v-list>
-                </v-menu>
-            </div>
-            <div>
-                <v-text-field append-icon="mdi-magnify" label="Search" single-line hide-details class="input-search"></v-text-field>
-            </div>
-            <div>
-                <v-row justify="center">
-                    <v-dialog v-model="dialog" persistent width="1024">
-                        <template v-slot:activator="{ props }">
-                            <v-btn color="#078640" v-bind="props">
-                                Filtros
-                            </v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                <span class="text-h5">Filtros</span>
-                            </v-card-title>
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Nome do aluno"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Nome Concedente"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Matrícula do Aluno"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="8" md="6">
-                                            <v-text-field 
-                                                label="Data Inicio" type="date"
-                                                hint="Data de Inicio de estágio no contrato" persistent-hint
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="8" md="6">
-                                            <v-text-field 
-                                                label="Data Final" type="date"
-                                                hint="Data de Fim de estágio no contrato" persistent-hint
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6">
-                                            <v-select :items="['Obrigatório', 'Não Obrigatório']" label="Tipo Estágio"
-                                                required></v-select>
-                                        </v-col>
-                                        <v-col cols="12" sm="6">
-                                            <v-autocomplete
-                                                :items="['TADS', 'Tec.Desenvolvimento de Sistemas', 'Turísmo', 'Pescador', 'Administração', 'Pedagogia', 'Lic.Letras', 'Tec.Mineração', 'Tec.Eventos']"
-                                                label="Curso"></v-autocomplete>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="#078640" variant="text" @click="dialog = false">
-                                    Cancelar
-                                </v-btn>
-                                <v-btn color="#078640" variant="text" @click="dialog = false">
-                                    Aplicar
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                </v-row>
-            </div>
-        </div>
+        <data-table-menu/>
         <div class="data-table">
             <table class="table-container">
                 <thead class="header-table">
                     <tr>
-                        <td v-for="(column, i) in columns" :key="i">
+                        <th v-for="(column, i) in columns" :key="i">
                             <span>{{ column }}</span>
-                        </td>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="body-table">
@@ -119,17 +39,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="text-center">
-            <v-pagination v-model="page" :length="15" :total-visible="7"></v-pagination>
+        <div>
+            <v-pagination v-model="page" :length="15" :total-visible="1" color="#078640"></v-pagination>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import dataTableMenu from '../data-table-menu/data-table-menu.vue';
 import { reactive, ref } from 'vue';
-const showOptions = ['10', '25', '50', '100'];
-const dialog = ref(false);
-const itemsPerPage = ref(50);
 const page = ref(1);
 const columns = reactive([
     'Aluno',
@@ -334,16 +252,40 @@ const registers = reactive([
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.input-search{
-    width: 600px;
+.header-table tr th:last-child{
+    position: sticky;
+    right: 0;
+    background-color: #e0e0e0;
+    z-index: 1; 
 }
 
 .data-table {
     border-radius: 4px;
     width: 100%;
-    max-height: 550px;
+    max-height: 60vh;
     overflow: auto;
     position: relative;
+}
+
+.data-table::-webkit-scrollbar {
+    width: 4px; /* Largura da barra de rolagem */
+    height: 4px; /* Altura da barra de rolagem */
+}
+
+/* Personalizar o trilho da barra de rolagem */
+.data-table::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo do trilho */
+}
+
+/* Personalizar o indicador da barra de rolagem (a própria barra) */
+.data-table::-webkit-scrollbar-thumb {
+    background: #078640; /* Cor da barra de rolagem */
+    border-radius: 6px; /* Borda arredondada */
+}
+
+/* Personalizar o indicador da barra de rolagem quando o mouse está sobre ele */
+.data-table::-webkit-scrollbar-thumb:hover {
+    background: #078640; /* Cor da barra de rolagem em hover */
 }
 
 .table-container {
@@ -356,7 +298,7 @@ const registers = reactive([
     position: sticky;
     width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 tr:nth-child(odd) {
@@ -373,22 +315,26 @@ td {
 }
 
 
-.table-menu{
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
-}
+
 
 @media screen and (max-width: 768px) {
-  .table-menu{
-    display: flex;
-    flex-direction: column;
+
+
+  table td:last-child{
+    position: sticky;
+    right: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
   }
 
-  .input-search{
-    width: 200px;
+table tr:nth-child(even) td:last-child {
+    background-color: #f2f2f2;
 }
+
+
+table tr:nth-child(odd) td:last-child {
+    background-color: #e0e0e0;
+}
+
 }
 </style>
