@@ -91,9 +91,6 @@
 </script>
 
 <style lang="scss" scoped>
-.dropdown-show-itens{
-    margin-left: 0.8rem;
-}
 
 .table-menu{
     width: 80%;

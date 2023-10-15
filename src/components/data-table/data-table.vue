@@ -1,5 +1,5 @@
 <template>
-    <div class="teste">
+    <div class="data-table-container">
         <data-table-menu/>
         <div class="data-table">
             <table class="table-container">
@@ -244,7 +244,7 @@ const registers = reactive([
 </script>
 
 <style lang="scss" scoped>
-.teste{
+.data-table-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -289,9 +289,13 @@ const registers = reactive([
 }
 
 .table-container {
-    
     border-collapse: collapse;
     width: 100%;
+}
+
+th span{
+    display: flex;
+    align-items: flex-start;
 }
 
 .header-table {
