@@ -13,18 +13,8 @@
                 <tbody class="body-table">
                     <tr v-for="(register, i) in registers" :key="i">
                         <td v-for="(key, j) in register" :key="j">
-                            <div v-if="key === 'concluído'">
-                                <v-chip color="green">
-                                    {{ key }}
-                                </v-chip>
-                            </div>
-                            <div v-else-if="key === 'em andamento'">
-                                <v-chip color="orange">
-                                    {{ key }}
-                                </v-chip>
-                            </div>
-                            <div v-else-if="key === 'recusado'">
-                                <v-chip color="red">
+                            <div v-if="key === register.status">
+                                <v-chip :color="defineColorStatus(key)">
                                     {{ key }}
                                 </v-chip>
                             </div>
@@ -49,6 +39,18 @@
 import dataTableMenu from '../data-table-menu/data-table-menu.vue';
 import { reactive, ref } from 'vue';
 const page = ref(1);
+
+function defineColorStatus(status:string):string | undefined{
+    switch (status) {
+        case 'concluído':
+            return 'green';
+        case 'em andamento':
+            return 'orange';
+        case 'recusado':
+            return 'red';
+    }
+}
+
 const columns = reactive([
     'Aluno',
     'Matricula',

@@ -2,7 +2,7 @@
     <div class="table-menu">
             <div class="show-items">
                 <span>show</span>
-                <div class="dropdown-show-itens">
+                <div>
                     <v-menu>
                         <template v-slot:activator="{ props }">
                             <v-btn color="#078640" v-bind="props">
@@ -91,6 +91,10 @@
 </script>
 
 <style lang="scss" scoped>
+
+span{
+    margin-right: 10px;
+}
 
 .table-menu{
     width: 80%;
