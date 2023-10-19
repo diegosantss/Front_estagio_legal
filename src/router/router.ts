@@ -1,31 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MasterMenu from '../views/layout/master-menu/master-menu.vue';
-import EstagioObrigatorioPage from '../views/estagio-obrigatorio/estagio-obrigatorio.vue'
-import EstagioNaoObrigatorioPage from '../views/estagio-nao-obrigatorio/estagio-nao-obrigatorio.vue';
+import HomePage from '../views/home-page/home-page.vue';
+import InicioEstagioPage from '../views/inicio-estagio/inicio-estagio.vue';
 import AcompanharProcessosDex from '../views/acompanhar-processos/visao-dex/acompanhar-processos.vue';
 import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue'
+import UserAutenticate from '../views/user-authenticate/user-authenticate.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'authenticate',
+      component: UserAutenticate
+    },
+    {
+      path: '/menu',
+      name: 'menu',
       component: MasterMenu,
       children:[
         {
           path: '', // Rota vazia
-          redirect: 'estagio/obrigatorio', // Redirecionar para a rota 'estagio/obrigatorio'
+          redirect: '/home', // Redirecionar para a rota 'estagio/obrigatorio'
         },
         {
-          path:'/estagio/obrigatorio',
-          name:'estagioObrigatorio',
-          component: EstagioObrigatorioPage
+          path:'/home',
+          name:'home',
+          component: HomePage
         },
         {
-          path:'/estagio/naoobrigatorio',
-          name:'estagioNaoObrigatorio',
-          component: EstagioNaoObrigatorioPage
+          path:'/inicio/estagio',
+          name:'inicioEstagio',
+          component: InicioEstagioPage
         },
         {
           path:'/acompanhar/processos',
