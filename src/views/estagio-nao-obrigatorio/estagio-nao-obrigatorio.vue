@@ -343,7 +343,9 @@
                   </v-row>
                 </v-container>
         </div>
-        <v-btn class="btn">Enviar</v-btn>
+        <v-btn class="btn" >
+          <router-link to="/Termo/Compromisso" class="router">Enviar</router-link>
+          </v-btn>
       </v-form>
     </div>
 </div>
