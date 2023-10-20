@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="acompanhar-processos-container">
     <div class="title">
       <h1 class="title1">Grid de Processos</h1>
     </div>
@@ -17,6 +17,10 @@ text-align: left;
 color: #858796;
 font-size: 1.5rem;
 margin-bottom: 1%;
+}
+
+.acompanhar-processos-container{
+  margin: 2%;
 }
 </style>
 

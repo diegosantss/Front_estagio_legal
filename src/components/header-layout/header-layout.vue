@@ -20,12 +20,12 @@
 
           <v-card min-width="200px">
             <v-list :lines="false" density="compact" nav>
-              <v-list-item prepend-icon="mdi-account-outline">
-                <v-list-item-title>Meu perfil</v-list-item-title>
+              <v-list-item>
+                <v-btn flat to="/" prepend-icon="mdi-account-outline" style="text-transform: capitalize; width: 100%; display: flex; justify-content: flex-start;">Meu perfil</v-btn>
               </v-list-item>
 
-              <v-list-item prepend-icon="mdi-heart-outline">
-                <v-list-item-title>Favoritos</v-list-item-title>
+              <v-list-item>
+                <v-btn flat to="/" prepend-icon="mdi-logout" style="text-transform: capitalize; width: 100%; display: flex; justify-content: flex-start;">Sair</v-btn>
               </v-list-item>
             </v-list>
           </v-card>
@@ -35,8 +35,6 @@
 </template>
 
 <script lang="ts" setup>
-    import { ref } from 'vue';
-    const isDrawerOpen = ref(false)
 
 </script>
 
