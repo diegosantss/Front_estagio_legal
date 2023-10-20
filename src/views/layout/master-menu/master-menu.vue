@@ -14,7 +14,7 @@
     
     <v-main>
       
-      <div style="margin: 2%;">
+      <div>
         <router-view></router-view>
       </div>
 
