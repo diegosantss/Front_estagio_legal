@@ -7,21 +7,20 @@
         <div class="form-authenticate">
             <div class="radio-inputs">
                 <label class="radio">
-                    <input type="radio" name="radio" checked>
+                    <input type="radio" name="radio" value="login" v-model="opcaoAutenticacao" checked>
                     <span class="name">Login</span>
                 </label>
 
                 <label class="radio">
-                    <input type="radio" name="radio">
+                    <input type="radio" name="radio" value="registrar" v-model="opcaoAutenticacao">
                     <span class="name">Registrar</span>
                 </label>
             </div>
-            <div>
+            <div v-if="opcaoAutenticacao === 'login'">
                 <form class="form_container">
                     <div class="title_container">
-                        <p class="title">Login to your Account</p>
-                        <span class="subtitle">Get started with our app, just create an account and enjoy the
-                            experience.</span>
+                        <p class="title">Faça login em sua conta !</p>
+                        <span class="subtitle">Faça o login para acessar o sistema</span>
                     </div>
                     <br>
                     <div class="input_container">
@@ -34,9 +33,53 @@
                         <input placeholder="Password" title="Inpit title" name="input-name" type="password"
                             class="input_field" id="password_field">
                     </div>
-                    <button title="Sign In" type="submit" class="sign-in_btn">
-                        <span>Sign In</span>
-                    </button>
+                    <v-btn title="Sign In" type="submit" class="sign-in_btn" to="/home">
+                        <span>Login</span>
+                    </v-btn>
+                    <p class="note">Terms of use &amp; Conditions</p>
+                </form>
+            </div>
+            <div v-else>
+                <form class="form_container">
+                    <div class="title_container">
+                        <p class="title">Cria sua conta !</p>
+                        <span class="subtitle">Preencha os seguintes dados para começar a utilizar o sistema</span>
+                    </div>
+                    <div class="form-register-inputs">
+                        <div class="input_container">
+                            <label class="input_label" for="email_field">Email</label>
+                            <input placeholder="name@mail.com" title="Inpit title" name="input-name" type="text"
+                                class="input_field" id="email_field">
+                        </div>
+                        <div class="input_container">
+                            <label class="input_label" for="password_field">Senha</label>
+                            <input placeholder="Password" title="Inpit title" name="input-name" type="password"
+                                class="input_field" id="password_field">
+                        </div>
+                        <div class="input_container">
+                            <label class="input_label" for="password_field">Confirmação de Senha</label>
+                            <input placeholder="Password" title="Inpit title" name="input-name" type="password"
+                                class="input_field" id="password_field">
+                        </div>
+                        <div class="input_container">
+                            <label class="input_label" for="email_field">Matrícula</label>
+                            <input placeholder="00000000000" title="Inpit title" name="input-name" type="text"
+                                class="input_field" id="email_field">
+                        </div>
+                        <div class="input_container">
+                            <label class="input_label" for="email_field">Cpf</label>
+                            <input placeholder="000.000.000-00" title="Inpit title" name="input-name" type="text"
+                                class="input_field" id="email_field">
+                        </div>
+                        <div class="input_container">
+                            <label class="input_label" for="email_field">data de nascimento</label>
+                            <input title="Inpit title" name="input-name" type="date"
+                                class="input_field" id="email_field">
+                        </div>
+                    </div>
+                    <v-btn title="Sign In" type="submit" class="sign-in_btn" to="home">
+                        <span>Registrar</span>
+                    </v-btn>
                     <p class="note">Terms of use &amp; Conditions</p>
                 </form>
             </div>
@@ -45,7 +88,8 @@
 </template>
 
 <script setup lang="ts">
-
+import {ref} from "vue";
+    const opcaoAutenticacao = ref("login");
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +106,12 @@
     height: 100vh;
 }
 
+.form-register-inputs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
 .titulo-sistema {
     display: flex;
     flex-direction: column;
@@ -73,6 +123,11 @@
     width: 50%;
 }
 
+.titulo-sistema h1{
+    font-size: 1.5em;
+    text-align: center;
+}
+
 h1 {
     font-size: 1.8rem;
 }
@@ -80,7 +135,6 @@ h1 {
 .logo-ifpa {
     width: 100px;
 }
-
 
 .form_container {
     width: fit-content;
@@ -220,5 +274,72 @@ h1 {
     background-color: #078640;
     color: #fff;
     font-weight: 600;
+}
+
+@media screen and (max-width: 860px) {
+    .authenticate-container{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .titulo-sistema {
+        display: flex;
+        flex-direction: row;
+        padding-top: 0;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #078640;
+        color: #fff;
+        width: 100%;
+    }
+
+    .titulo-sistema h1{
+        font-size: 0.9rem;
+    }
+
+    .logo-ifpa{
+        width: 3rem;
+        height: 4.1rem;
+    }
+
+    .form-authenticate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .form_container{
+        max-width: 327px;
+        margin-bottom: 20%;
+    }
+
+    .form-register-inputs{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .radio-inputs {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 0.5rem;
+        background-color: #EEE;
+        box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+        padding: 0.25rem;
+        width: 80%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .form-register-inputs{
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 }
 </style>

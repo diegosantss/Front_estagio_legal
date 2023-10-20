@@ -10,13 +10,13 @@
       <v-btn>
         <v-icon>mdi-home</v-icon>
 
-        <router-link to="/estagio/obrigatorio" class="span-button">home</router-link>
+        <router-link to="/home" class="span-button">home</router-link>
       </v-btn>
 
       <v-btn>
         <v-icon>mdi-file</v-icon>
 
-        <router-link to="/estagio/naoobrigatorio" class="span-button">Inicio de Estágio</router-link>
+        <router-link to="/inicio/estagio" class="span-button">Inicio de Estágio</router-link>
       </v-btn>
 
       <v-btn>
