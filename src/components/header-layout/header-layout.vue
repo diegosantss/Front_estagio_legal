@@ -1,7 +1,6 @@
 <template>
     <v-app-bar class="border-b">
-      <v-app-bar-nav-icon @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
-      <v-app-bar-title>Meu app</v-app-bar-title>
+      <v-app-bar-title></v-app-bar-title>
 
       <template #append>
         <v-btn icon class="mr-2">
