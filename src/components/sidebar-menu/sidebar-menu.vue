@@ -19,7 +19,7 @@
           
         <v-list-item prepend-icon="mdi-home" title="Home" value="home" to="/home"></v-list-item>
         <v-list-item prepend-icon="mdi-file" title="Inicio de Estágio" value="inicioEstagio" to="/inicio/estagio"></v-list-item>
-        <v-list-item prepend-icon="mdi-calendar" title="Fim de Estágio" value="fimEstagio"></v-list-item>
+        <v-list-item prepend-icon="mdi-calendar" title="Fim de Estágio" value="fimEstagio" to="/fim/estagio"></v-list-item>
           <v-list-item prepend-icon="mdi-update" title="Acompanhar Processos" value="acompanharProcessos" to="/acompanhar/processos"></v-list-item>
       </v-list>
         <template v-slot:append>
