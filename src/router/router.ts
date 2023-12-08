@@ -3,8 +3,9 @@ import MasterMenu from '../views/layout/master-menu/master-menu.vue';
 import HomePage from '../views/home-page/home-page.vue';
 import InicioEstagioPage from '../views/inicio-estagio/inicio-estagio.vue';
 import AcompanharProcessosDex from '../views/acompanhar-processos/visao-dex/acompanhar-processos.vue';
-import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue'
+import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue';
 import UserAutenticate from '../views/user-authenticate/user-authenticate.vue';
+import DetalhamentoProcessoEstagio from '../views/detalhamento-processo-estagio/detalhamento-processo-estagio.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,7 +43,12 @@ const router = createRouter({
           path:'/Termo/Compromisso',
           name:'termoDeCompromisso',
           component: TermoDeCompromisso
-        }
+        },
+        {
+          path:'/detalhamento/processo/:id',
+          name:'detalhamentoProcessoEstagio',
+          component: DetalhamentoProcessoEstagio
+        },
       ]
     },
   ]

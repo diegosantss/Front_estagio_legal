@@ -19,7 +19,9 @@
                                 </v-chip>
                             </div>
                             <div v-else-if="key === register.link">
-                                <v-icon icon="mdi-file" style="color: #078640;"></v-icon>
+                                <router-link :to="{name:'detalhamentoProcessoEstagio', params:{id: register.link}}">
+                                    <v-icon icon="mdi-file" style="color: #078640;"></v-icon>
+                                </router-link>
                             </div>
                             <div v-else>
                                 <span>{{ key }}</span>
@@ -59,7 +61,7 @@ const columns = reactive([
     'Movimentação',
     'Status',
     'Curso',
-    'Link'
+    'Detalhes'
 ]);
 const registers = reactive([
     {
@@ -70,7 +72,7 @@ const registers = reactive([
         movimentacao: 'Inicio de Estágio',
         status: 'concluído',
         curso: 'TADS',
-        link: 'redirect',
+        link: 1,
     },
     {
         aluno: 'Diego',
@@ -80,7 +82,7 @@ const registers = reactive([
         movimentacao: 'Inicio de Estágio',
         status: 'em andamento',
         curso: 'TADS',
-        link: 'redirect',
+        link: 2,
     },
     {
         aluno: 'Rafael',
@@ -90,7 +92,7 @@ const registers = reactive([
         movimentacao: 'Inicio de Estágio',
         status: 'recusado',
         curso: 'TADS',
-        link: 'redirect',
+        link: 3,
     },
     {
         aluno: 'Diego',
