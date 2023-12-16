@@ -39,8 +39,11 @@
 
 <script setup lang="ts">
 import dataTableMenu from '../data-table-menu/data-table-menu.vue';
-import { reactive, ref } from 'vue';
-const page = ref(1);
+import { reactive} from 'vue';
+import {useDataTableStore} from '../../stores/processDataTable.store';
+import  {storeToRefs} from 'pinia';
+const store =  useDataTableStore();
+const {page} = storeToRefs(store);
 
 function defineColorStatus(status:string):string | undefined{
     switch (status) {
@@ -64,7 +67,7 @@ const columns = reactive([
     'Detalhes'
 ]);
 const registers = reactive([
-    {
+{
         aluno: 'Rafael',
         matricula: 20190796872,
         dataInicio: '10/09/2019',
@@ -245,6 +248,7 @@ const registers = reactive([
         link: 'redirect',
     },
 ]);
+
 </script>
 
 <style lang="scss" scoped>

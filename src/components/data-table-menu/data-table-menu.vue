@@ -6,19 +6,20 @@
                     <v-menu>
                         <template v-slot:activator="{ props }">
                             <v-btn color="#078640" v-bind="props">
-                                10
+                                {{ showItems }}
                             </v-btn>
                         </template>
                         <v-list>
                             <v-list-item v-for="(item, index) in showOptions" :key="index" :value="index">
-                                <v-list-item-title>{{ item }}</v-list-item-title>
+                                <v-list-item-title @click="defineShowItems(Number(item))">{{ item }}</v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-menu>
                 </div>
             </div>
             <div class="input-search">
-                <v-text-field append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+                <v-text-field label="Search" single-line hide-details v-model="inputSearch"></v-text-field>
+                <v-btn append-icon="mdi-magnify" color="#078640" @click="findByQuery"></v-btn>
             </div>
             <div class="btn-filtros">
                 <v-row justify="center">
@@ -36,36 +37,45 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Nome do aluno"></v-text-field>
+                                            <v-text-field label="Nome do aluno" v-model="filtros.nameAluno"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Nome Concedente"></v-text-field>
+                                            <v-text-field label="Nome Concedente" v-model="filtros.nomeConcedente"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field label="Matrícula do Aluno"></v-text-field>
+                                            <v-text-field label="Matrícula do Aluno" v-model="filtros.matriculaAluno"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="8" md="6">
                                             <v-text-field 
                                                 label="Data Inicio" type="date"
                                                 hint="Data de Inicio de estágio no contrato" persistent-hint
+                                                v-model="filtros.dataInicioEstagio"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="8" md="6">
                                             <v-text-field 
                                                 label="Data Final" type="date"
                                                 hint="Data de Fim de estágio no contrato" persistent-hint
+                                                v-model="filtros.dataFimestagio"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6">
-                                            <v-select :items="['Obrigatório', 'Não Obrigatório']" label="Tipo Estágio"
-                                                required></v-select>
+                                            <v-select 
+                                                :items="['Obrigatório', 'Não Obrigatório']"
+                                                label="Tipo Estágio"
+                                                v-model="filtros.tipoEstagio"
+                                                required
+                                            ></v-select>
                                         </v-col>
                                         <v-col cols="12" sm="6">
                                             <v-autocomplete
                                                 :items="['TADS', 'Tec.Desenvolvimento de Sistemas', 'Turísmo', 'Pescador', 'Administração', 'Pedagogia', 'Lic.Letras', 'Tec.Mineração', 'Tec.Eventos']"
-                                                label="Curso"></v-autocomplete>
+                                                label="Curso"
+                                                v-model="filtros.cursoAluno"
+                                            ></v-autocomplete>
                                         </v-col>
                                     </v-row>
+                                    <v-btn color="#078640" @click="limparFiltros">Limpar Filtros</v-btn>
                                 </v-container>
                             </v-card-text>
                             <v-card-actions>
@@ -73,7 +83,7 @@
                                 <v-btn color="#078640" variant="text" @click="dialog = false">
                                     Cancelar
                                 </v-btn>
-                                <v-btn color="#078640" variant="text" @click="dialog = false">
+                                <v-btn color="#078640" variant="text" @click="findProcess">
                                     Aplicar
                                 </v-btn>
                             </v-card-actions>
@@ -85,9 +95,63 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from 'vue';
-    const showOptions = ['10', '25', '50', '100'];
+    import { ref, reactive } from 'vue';
+    import  axios from 'axios';
+    import {useDataTableStore} from '../../stores/processDataTable.store';
+    import  {storeToRefs} from 'pinia';
+
+    const store = useDataTableStore();
+    const  {atualizarFiltros} = store
+    const {showItems,page,filtros} = storeToRefs(store);
+
+    const showOptions:string[] = ['10', '25', '50', '100'];
+    
+    const inputSearch = ref('');
     const dialog = ref(false);
+
+    const internshipProcess = reactive([]);
+
+    async function findProcess(){
+        dialog.value = false;
+        console.log(page.value);
+        const response = await axios.get('http://localhost:3001/processo/estagio/filter',{
+            params:{
+                ...filtros,
+                page:page,
+                pageSize: showItems
+            }
+        })
+    }
+
+    function limparFiltros(){
+        atualizarFiltros({
+            nameAluno: null,
+            nomeConcedente: null,
+            matriculaAluno: null,
+            dataInicioEstagio: null,
+            dataFimestagio: null,
+            tipoEstagio: null,
+            cursoAluno: null,
+        });
+    }
+
+    async function findByQuery(){
+        const response = await axios.get('http://localhost:3001/processo/estagio/findBy',{
+            params:{
+                query: inputSearch,
+                page: page,
+                pageSize: showItems
+            }
+        })
+
+        internshipProcess.values = response.data;
+    }
+
+    const defineShowItems = (value: number) => {
+        showItems.value = value;
+    };
+
+    
 </script>
 
 <style lang="scss" scoped>
@@ -105,6 +169,9 @@ span{
 }
 
 .input-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
 }
 
