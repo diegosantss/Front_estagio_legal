@@ -95,32 +95,60 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, reactive } from 'vue';
+    import { ref, reactive, onMounted, watch } from 'vue';
     import  axios from 'axios';
     import {useDataTableStore} from '../../stores/processDataTable.store';
     import  {storeToRefs} from 'pinia';
 
     const store = useDataTableStore();
-    const  {atualizarFiltros} = store
+    const  {atualizarFiltros, atualizarInternshipProcessRegisters} = store
     const {showItems,page,filtros} = storeToRefs(store);
 
     const showOptions:string[] = ['10', '25', '50', '100'];
+
+    enum TypeRequest{
+        FindByQuery,
+        FindByFilter
+    }
     
     const inputSearch = ref('');
     const dialog = ref(false);
+    const lasttypeRequest = ref<TypeRequest>(TypeRequest.FindByFilter);
 
     const internshipProcess = reactive([]);
 
+    onMounted(async () => {
+        await findProcess();
+    });
+
+    watch(page, () => {
+        if(lasttypeRequest.value === TypeRequest.FindByFilter){
+            console.log('mudei pra filter')
+            findProcess()
+        }else if(lasttypeRequest.value === TypeRequest.FindByQuery){
+            console.log('mudei pra  query')
+            findByQuery()
+        }
+    });
+
     async function findProcess(){
         dialog.value = false;
-        console.log(page.value);
         const response = await axios.get('http://localhost:3001/processo/estagio/filter',{
             params:{
-                ...filtros,
-                page:page,
-                pageSize: showItems
+                'user[name]':filtros.value.nameAluno,
+                'user[registration]':filtros.value.matriculaAluno,
+                startDateProcess:filtros.value.dataInicioEstagio,
+                endDateProcess:filtros.value.dataFimestagio,
+                page:page.value,
+                pageSize: showItems.value
             }
         })
+
+        console.log(response.data);
+        atualizarInternshipProcessRegisters(response.data);
+        inputSearch.value = '';
+        lasttypeRequest.value = TypeRequest.FindByFilter;
+        
     }
 
     function limparFiltros(){
@@ -138,17 +166,19 @@
     async function findByQuery(){
         const response = await axios.get('http://localhost:3001/processo/estagio/findBy',{
             params:{
-                query: inputSearch,
-                page: page,
-                pageSize: showItems
+                query: inputSearch.value,
+                page: page.value,
+                pageSize: showItems.value
             }
         })
 
-        internshipProcess.values = response.data;
+        atualizarInternshipProcessRegisters(response.data);
+        lasttypeRequest.value = TypeRequest.FindByQuery;
     }
 
     const defineShowItems = (value: number) => {
         showItems.value = value;
+        findProcess();
     };
 
     

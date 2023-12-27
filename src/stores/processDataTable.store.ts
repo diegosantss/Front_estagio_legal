@@ -1,5 +1,6 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
+import type { InternshipProcess } from '@/api/internshipProcess.interface';
 
 interface Filtros {
     nameAluno: string | null;
@@ -24,9 +25,15 @@ export const useDataTableStore = defineStore('dataTable', () => {
     cursoAluno: null,
   });
 
+  const internshipProcessRegisters = ref<InternshipProcess[]>([]);
+
   const atualizarFiltros = (novosFiltros:any) => {
     Object.assign(filtros, novosFiltros);
   };
 
-  return { showItems,page,filtros,atualizarFiltros };
+  const atualizarInternshipProcessRegisters = (registros: InternshipProcess[]) => {
+    internshipProcessRegisters.value = [...registros];
+  };
+
+  return { showItems, page, filtros, internshipProcessRegisters, atualizarFiltros, atualizarInternshipProcessRegisters };
 })
