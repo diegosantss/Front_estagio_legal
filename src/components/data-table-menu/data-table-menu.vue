@@ -19,7 +19,9 @@
             </div>
             <div class="input-search">
                 <v-text-field label="Search" single-line hide-details v-model="inputSearch"></v-text-field>
-                <v-btn append-icon="mdi-magnify" color="#078640" @click="findByQuery"></v-btn>
+                <v-btn class="search-button" id="search-button" @click="findByQuery">
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
             </div>
             <div class="btn-filtros">
                 <v-row justify="center">
@@ -45,20 +47,46 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field label="Matrícula do Aluno" v-model="filtros.matriculaAluno"></v-text-field>
                                         </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <p>Intervalo de inicio do Processo de Estágio</p>
+                                    </v-row>
+                                    <v-row>
                                         <v-col cols="12" sm="8" md="6">
                                             <v-text-field 
-                                                label="Data Inicio" type="date"
-                                                hint="Data de Inicio de estágio no contrato" persistent-hint
-                                                v-model="filtros.dataInicioEstagio"
+                                                label="Inicio Intervalo de Busca" type="date"
+                                                hint="Data de entrada do processo no sistema" persistent-hint
+                                                v-model="filtros.dataInicioEstagioRangeStart"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="8" md="6">
                                             <v-text-field 
-                                                label="Data Final" type="date"
-                                                hint="Data de Fim de estágio no contrato" persistent-hint
-                                                v-model="filtros.dataFimestagio"
+                                                label="Fim Intervalo de Busca" type="date"
+                                                hint="Data de entrada do processo no sistema" persistent-hint
+                                                v-model="filtros.dataInicioEstagioRangeEnd"
                                             ></v-text-field>
                                         </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <p>Intervalo de Fim do Processo de Estágio</p>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col cols="12" sm="8" md="6">
+                                            <v-text-field 
+                                                label="Inicio Intervalo de Busca" type="date"
+                                                hint="Data de encerramento do ciclo do processo no sistema" persistent-hint
+                                                v-model="filtros.dataFimestagioRangeStart"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="8" md="6">
+                                            <v-text-field 
+                                                label="Fim Intervalo de Busca" type="date"
+                                                hint="Data de encerramento do ciclo do processo no sistema" persistent-hint
+                                                v-model="filtros.dataFimestagioRangeEnd"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
                                         <v-col cols="12" sm="6">
                                             <v-select 
                                                 :items="['Obrigatório', 'Não Obrigatório']"
@@ -95,10 +123,11 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, reactive, onMounted, watch } from 'vue';
+    import { ref, onMounted, watch, onUpdated } from 'vue';
     import  axios from 'axios';
     import {useDataTableStore} from '../../stores/processDataTable.store';
     import  {storeToRefs} from 'pinia';
+import axiosInstance from '@/interceptors/axios-interceptor';
 
     const store = useDataTableStore();
     const  {atualizarFiltros, atualizarInternshipProcessRegisters} = store
@@ -114,10 +143,13 @@
     const inputSearch = ref('');
     const dialog = ref(false);
     const lasttypeRequest = ref<TypeRequest>(TypeRequest.FindByFilter);
-
-    const internshipProcess = reactive([]);
+    const getAccessToken = () => localStorage.getItem('access_token');
 
     onMounted(async () => {
+        await findProcess();
+    });
+
+    onUpdated(async () => {
         await findProcess();
     });
 
@@ -133,18 +165,23 @@
 
     async function findProcess(){
         dialog.value = false;
-        const response = await axios.get('http://localhost:3001/processo/estagio/filter',{
+
+        const response = await axiosInstance.get('processo/estagio/filter',{
             params:{
                 'user[name]':filtros.value.nameAluno,
                 'user[registration]':filtros.value.matriculaAluno,
-                startDateProcess:filtros.value.dataInicioEstagio,
-                endDateProcess:filtros.value.dataFimestagio,
+                startDateProcessRangeStart:filtros.value.dataInicioEstagioRangeStart,
+                startDateProcessRangeEnd:filtros.value.dataInicioEstagioRangeEnd,
+                endDateProcessRangeStart:filtros.value.dataFimestagioRangeStart,
+                endDateProcessRangeEnd:filtros.value.dataFimestagioRangeEnd,
                 page:page.value,
                 pageSize: showItems.value
-            }
+            },
+            headers: {
+                'Authorization': `Bearer ${getAccessToken()}`,
+            },
         })
 
-        console.log(response.data);
         atualizarInternshipProcessRegisters(response.data);
         inputSearch.value = '';
         lasttypeRequest.value = TypeRequest.FindByFilter;
@@ -153,11 +190,13 @@
 
     function limparFiltros(){
         atualizarFiltros({
-            nameAluno: null,
+            nameAluno:null,
             nomeConcedente: null,
             matriculaAluno: null,
-            dataInicioEstagio: null,
-            dataFimestagio: null,
+            dataInicioEstagioRangeStart: null,
+            dataInicioEstagioRangeEnd: null,
+            dataFimestagioRangeStart: null,
+            dataFimestagioRangeEnd: null,
             tipoEstagio: null,
             cursoAluno: null,
         });
@@ -184,55 +223,4 @@
     
 </script>
 
-<style lang="scss" scoped>
-
-span{
-    margin-right: 10px;
-}
-
-.table-menu{
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-}
-
-.input-search{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-}
-
-.show-items{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10%;
-}
-
-.btn-filtros{
-    width: 10%;
-}
-
-@media screen and (max-width: 768px) {
-    .table-menu{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .input-search{
-        width: 60%;
-    }
-
-    .show-items{
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-
-</style>
+<style src="./style.scss" lang="scss" scoped></style>

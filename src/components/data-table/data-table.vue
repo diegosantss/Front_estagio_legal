@@ -117,6 +117,7 @@ function formatarDataBrasileira(data: string | Date): string {
 .data-table {
     border-radius: 4px;
     width: 100%;
+    min-height: 45vh;
     max-height: 60vh;
     overflow: auto;
     position: relative;
