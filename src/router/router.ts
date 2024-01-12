@@ -1,63 +1,36 @@
+import { useUserAuthStore } from '@/stores/userAuth.store';
 import { createRouter, createWebHistory } from 'vue-router';
-import MasterMenu from '../views/layout/master-menu/master-menu.vue';
-import HomePage from '../views/home-page/home-page.vue';
-import InicioEstagioPage from '../views/inicio-estagio/inicio-estagio.vue';
-import AcompanharProcessosDex from '../views/acompanhar-processos/visao-dex/acompanhar-processos.vue';
-import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue';
-import FimEstagioPage from '../views/fim-estagio/fim-estagio.vue'
-import UserAutenticate from '../views/user-authenticate/user-authenticate.vue';
-import DetalhamentoProcessoEstagio from '../views/detalhamento-processo-estagio/detalhamento-processo-estagio.vue';
+import { privateRoutes } from './privateRoutes';
+import { publicRoutes } from './publicRoutes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'authenticate',
-      component: UserAutenticate
-    },
-    {
-      path: '/menu',
-      name: 'menu',
-      component: MasterMenu,
-      children:[
-        {
-          path: '', // Rota vazia
-          redirect: '/home', // Redirecionar para a rota 'estagio/obrigatorio'
-        },
-        {
-          path:'/home',
-          name:'home',
-          component: HomePage
-        },
-        {
-          path:'/inicio/estagio',
-          name:'inicioEstagio',
-          component: InicioEstagioPage
-        },
-        {
-          path:'/acompanhar/processos',
-          name:'acompanharProcessos',
-          component: AcompanharProcessosDex
-        },
-        {
-          path:'/Termo/Compromisso',
-          name:'termoDeCompromisso',
-          component: TermoDeCompromisso
-        },
-        {
-          path:'/fim/estagio',
-          name:'fimEstagio',
-          component: FimEstagioPage
-        },
-        {
-          path:'/detalhamento/processo/:id',
-          name:'detalhamentoProcessoEstagio',
-          component: DetalhamentoProcessoEstagio
-        },
-      ]
-    },
+    ...publicRoutes,
+    ...privateRoutes,
   ]
+})
+
+router.beforeEach( async (to,from,next) => {
+  const userAuthStore = useUserAuthStore();
+
+  const auth = to.matched.some(record => record.meta.auth);
+
+  if(auth && !userAuthStore.isAuth){
+    try {
+      const user = await userAuthStore.checkToken();
+      userAuthStore.setUser(user);
+      userAuthStore.setIsAuth(true);
+      console.log('verificação realizada');  
+      next();
+    } catch (error) {
+      userAuthStore.clear();
+      next('authenticate');
+    }
+  }else{
+    console.log('nao precisou verificar');
+    next();
+  }
 })
 
 export default router

@@ -155,10 +155,8 @@ import axiosInstance from '@/interceptors/axios-interceptor';
 
     watch(page, () => {
         if(lasttypeRequest.value === TypeRequest.FindByFilter){
-            console.log('mudei pra filter')
             findProcess()
         }else if(lasttypeRequest.value === TypeRequest.FindByQuery){
-            console.log('mudei pra  query')
             findByQuery()
         }
     });

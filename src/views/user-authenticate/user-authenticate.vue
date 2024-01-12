@@ -104,6 +104,8 @@
     import {ref, reactive} from "vue";
     import { useRouter } from 'vue-router';
     const router = useRouter();
+    import { useUserAuthStore } from "@/stores/userAuth.store";
+    const userAuthStore = useUserAuthStore();
     import axios from 'axios';
     const opcaoAutenticacao = ref("login");
 
@@ -118,8 +120,8 @@
             const response = await axios.post('http://localhost:3001/auth/login', formLogin);
             const tokens = response.data;
             if (tokens && tokens.access_token && tokens.refresh_token) {
-                localStorage.setItem('access_token',tokens.access_token)
-                localStorage.setItem('refresh_token',tokens.refresh_token);
+                userAuthStore.setAccessToken(tokens.access_token);
+                userAuthStore.setRefreshToken(tokens.refresh_token);
                 router.push('home');
             }
         } catch (error:any) {

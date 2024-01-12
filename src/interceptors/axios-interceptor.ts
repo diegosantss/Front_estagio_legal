@@ -11,7 +11,7 @@ axiosInstance.interceptors.response.use(
         try {
           const response = await axiosInstance.post('auth/refresh/token', { refresh_token: localStorage.getItem('refresh_token') });
   
-          console.log(response);
+
           if (response.status === 200) {
 
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;

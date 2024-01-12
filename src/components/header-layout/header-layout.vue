@@ -37,8 +37,10 @@
 <script lang="ts" setup>
   import { useRouter } from 'vue-router';
   const router = useRouter();
+  import { useUserAuthStore } from '@/stores/userAuth.store';
+  const userAuthStore = useUserAuthStore();
   async function logout(){
-    localStorage.clear();
+    userAuthStore.clear();
     
     router.push('/');
   }
