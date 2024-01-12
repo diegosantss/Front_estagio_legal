@@ -6,8 +6,7 @@ import {ref} from 'vue';
 export const useUserAuthStore = defineStore('userAuth', () => {
     const isAuth = ref(false);
 
-    const storedUser = localStorage.getItem('user');
-    const user = ref(storedUser ? JSON.parse(storedUser) : null);
+    const user = ref({});
 
     const storedAccessToken = localStorage.getItem('access_token');
     const access_token = ref(storedAccessToken ? storedAccessToken : null);
@@ -26,7 +25,6 @@ export const useUserAuthStore = defineStore('userAuth', () => {
     }
 
     function setUser(userValue:any) {
-        localStorage.setItem('user', JSON.stringify(userValue));
         user.value = userValue;
     }
 
