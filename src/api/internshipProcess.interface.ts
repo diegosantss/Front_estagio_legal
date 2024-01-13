@@ -1,8 +1,6 @@
 import type { TermCommitment } from "./termCommitment.interface";
 import type { User } from "./user.interface";
 
-
-
 export interface InternshipProcess {
     id: string;
     movement: string;

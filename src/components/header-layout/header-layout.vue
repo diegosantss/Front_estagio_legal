@@ -25,7 +25,7 @@
               </v-list-item>
 
               <v-list-item>
-                <v-btn flat to="/" prepend-icon="mdi-logout" style="text-transform: capitalize; width: 100%; display: flex; justify-content: flex-start;">Sair</v-btn>
+                <v-btn flat @click="logout" prepend-icon="mdi-logout" style="text-transform: capitalize; width: 100%; display: flex; justify-content: flex-start;">Sair</v-btn>
               </v-list-item>
             </v-list>
           </v-card>
@@ -35,7 +35,15 @@
 </template>
 
 <script lang="ts" setup>
-
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+  import { useUserAuthStore } from '@/stores/userAuth.store';
+  const userAuthStore = useUserAuthStore();
+  async function logout(){
+    userAuthStore.clear();
+    
+    router.push('/');
+  }
 </script>
 
 <style src="./style.scss" lang="scss" scoped>

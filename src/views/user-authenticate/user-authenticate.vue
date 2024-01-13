@@ -25,17 +25,30 @@
                     <br>
                     <div class="input_container">
                         <label class="input_label" for="email_field">Email</label>
-                        <input placeholder="name@mail.com" title="Inpit title" name="input-name" type="text"
-                            class="input_field" id="email_field">
+                        <input 
+                            placeholder="name@mail.com" 
+                            title="Inpit title" 
+                            name="input-name"
+                            type="text"
+                            class="input_field" id="email_field"
+                            v-model="formLogin.email"
+                        >
                     </div>
                     <div class="input_container">
                         <label class="input_label" for="password_field">Password</label>
-                        <input placeholder="Password" title="Inpit title" name="input-name" type="password"
-                            class="input_field" id="password_field">
+                        <input 
+                            placeholder="Password" 
+                            title="Inpit title" 
+                            name="input-name" 
+                            type="password"
+                            class="input_field" id="password_field"
+                            v-model="formLogin.password"
+                        >
                     </div>
-                    <v-btn title="Sign In" type="submit" class="sign-in_btn" to="/home">
+                    <v-btn title="Sign In" class="sign-in_btn" @click="login">
                         <span>Login</span>
                     </v-btn>
+                    <p class="infoLogin">{{ formLogin.infoLogin }}</p>
                     <p class="note">Terms of use &amp; Conditions</p>
                 </form>
             </div>
@@ -88,11 +101,46 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+    import {ref, reactive} from "vue";
+    import { useRouter } from 'vue-router';
+    const router = useRouter();
+    import { useUserAuthStore } from "@/stores/userAuth.store";
+    const userAuthStore = useUserAuthStore();
+    import axios from 'axios';
     const opcaoAutenticacao = ref("login");
+
+    const formLogin = reactive({
+        email:'',
+        password:'',
+        infoLogin: ''
+    });
+
+    async function login(){
+        try {
+            const response = await axios.post('http://localhost:3001/auth/login', formLogin);
+            const tokens = response.data;
+            if (tokens && tokens.access_token && tokens.refresh_token) {
+                userAuthStore.setAccessToken(tokens.access_token);
+                userAuthStore.setRefreshToken(tokens.refresh_token);
+                router.push('home');
+            }
+        } catch (error:any) {
+            if(!error.response){
+                formLogin.infoLogin = 'Servidor temporariamente fora do ar';
+            } else if(error.response.status === 500){
+                formLogin.infoLogin = 'Email ou senha Incorretos';
+            } else{
+                console.log('Erro durante a requisição de login:');
+            }
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
+
+.infoLogin{
+    color: red;
+}
 .form-authenticate {
     display: flex;
     flex-direction: column;

@@ -14,12 +14,12 @@
     
     <v-main>
       
-      <div>
+      <div id="app-content">
         <router-view></router-view>
       </div>
 
-      <footerLayout/>
       
+      <footerLayout/>
     </v-main>
 
 </template>

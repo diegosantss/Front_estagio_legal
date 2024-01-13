@@ -6,8 +6,10 @@ interface Filtros {
     nameAluno: string | null;
     nomeConcedente: string | null;
     matriculaAluno: string | null;
-    dataInicioEstagio: string | null;
-    dataFimestagio: string | null;
+    dataInicioEstagioRangeStart: string | null;
+    dataInicioEstagioRangeEnd: string | null;
+    dataFimestagioRangeStart: string | null;
+    dataFimestagioRangeEnd: string | null;
     tipoEstagio: string | null;
     cursoAluno: string | null;
 }
@@ -19,8 +21,10 @@ export const useDataTableStore = defineStore('dataTable', () => {
     nameAluno:null,
     nomeConcedente: null,
     matriculaAluno: null,
-    dataInicioEstagio: null,
-    dataFimestagio: null,
+    dataInicioEstagioRangeStart: null,
+    dataInicioEstagioRangeEnd: null,
+    dataFimestagioRangeStart: null,
+    dataFimestagioRangeEnd: null,
     tipoEstagio: null,
     cursoAluno: null,
   });
