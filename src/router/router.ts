@@ -7,6 +7,7 @@ import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromis
 import FimEstagioPage from '../views/fim-estagio/fim-estagio.vue'
 import UserAutenticate from '../views/user-authenticate/user-authenticate.vue';
 import DetalhamentoProcessoEstagio from '../views/detalhamento-processo-estagio/detalhamento-processo-estagio.vue';
+import FormTCE from '../views/FormTCE/form-tce.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +55,11 @@ const router = createRouter({
           path:'/detalhamento/processo/:id',
           name:'detalhamentoProcessoEstagio',
           component: DetalhamentoProcessoEstagio
+        },
+        {
+          path:'/formulario/tce',
+          name:'formulariotce',
+          component: FormTCE
         },
       ]
     },
