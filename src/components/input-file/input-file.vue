@@ -69,7 +69,6 @@ const openFileInput = () => {
     const selectedFiles: any[] = [];
       function uploadFile (){
         selectedFiles.push(files.value.files);
-        console.log('Arquivos selecionados:', selectedFiles);
 
         // if(!file) return;
         // const fileName = (file.name.length >= 12) ? file.name.substring(0, 13) + '... .' + file.name.split('.')[1] : file.name;

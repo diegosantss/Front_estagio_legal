@@ -21,14 +21,12 @@ router.beforeEach( async (to,from,next) => {
       const user = await userAuthStore.checkToken();
       userAuthStore.setUser(user);
       userAuthStore.setIsAuth(true);
-      console.log('verificação realizada');  
       next();
     } catch (error) {
       userAuthStore.clear();
       next('authenticate');
     }
   }else{
-    console.log('nao precisou verificar');
     next();
   }
 })

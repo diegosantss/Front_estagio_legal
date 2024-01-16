@@ -90,7 +90,7 @@
                                 class="input_field" id="email_field">
                         </div>
                     </div>
-                    <v-btn title="Sign In" type="submit" class="sign-in_btn" to="home">
+                    <v-btn title="Sign In" class="sign-in_btn" @click="register">
                         <span>Registrar</span>
                     </v-btn>
                     <p class="note">Terms of use &amp; Conditions</p>
@@ -106,7 +106,8 @@
     const router = useRouter();
     import { useUserAuthStore } from "@/stores/userAuth.store";
     const userAuthStore = useUserAuthStore();
-    import axios from 'axios';
+
+    import axiosInstance from "@/interceptors/axios-interceptor";
     const opcaoAutenticacao = ref("login");
 
     const formLogin = reactive({
@@ -117,7 +118,27 @@
 
     async function login(){
         try {
-            const response = await axios.post('http://localhost:3001/auth/login', formLogin);
+            const response = await axiosInstance.post('auth/login', formLogin);
+            const tokens = response.data;
+            if (tokens && tokens.access_token && tokens.refresh_token) {
+                userAuthStore.setAccessToken(tokens.access_token);
+                userAuthStore.setRefreshToken(tokens.refresh_token);
+                router.push('home');
+            }
+        } catch (error:any) {
+            if(!error.response){
+                formLogin.infoLogin = 'Servidor temporariamente fora do ar';
+            } else if(error.response.status === 500){
+                formLogin.infoLogin = 'Email ou senha Incorretos';
+            } else{
+                console.log('Erro durante a requisição de login:');
+            }
+        }
+    }
+
+    async function register(){
+        try {
+            const response = await axiosInstance.post('user/createAluno', formLogin);
             const tokens = response.data;
             if (tokens && tokens.access_token && tokens.refresh_token) {
                 userAuthStore.setAccessToken(tokens.access_token);

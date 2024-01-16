@@ -75,6 +75,7 @@
 
 <script lang="ts" setup>
     import type { InternshipProcess } from '@/api/internshipProcess.interface';
+import axiosInstance from '@/interceptors/axios-interceptor';
     import  axios from 'axios';
     import { ref } from 'vue';
     import  {onMounted}  from 'vue';
@@ -90,7 +91,7 @@
     });
 
     async function findinternshipProcessById(){
-        const response = await axios.get(`http://localhost:3001/processo/estagio/${internshipProcessID}`)
+        const response = await axiosInstance.get(`processo/estagio/${internshipProcessID}`)
 
         internshipProcess.value = response.data;
     }

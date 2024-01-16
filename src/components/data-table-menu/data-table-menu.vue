@@ -201,7 +201,7 @@ import axiosInstance from '@/interceptors/axios-interceptor';
     }
 
     async function findByQuery(){
-        const response = await axios.get('http://localhost:3001/processo/estagio/findBy',{
+        const response = await axiosInstance.get('processo/estagio/findBy',{
             params:{
                 query: inputSearch.value,
                 page: page.value,
