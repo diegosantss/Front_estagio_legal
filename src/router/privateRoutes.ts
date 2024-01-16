@@ -5,6 +5,8 @@ import AcompanharProcessosDex from '../views/acompanhar-processos/visao-dex/acom
 import TermoDeCompromisso from '../views/Termo-de-Compromisso/Termo-de-Compromisso.vue';
 import FimEstagioPage from '../views/fim-estagio/fim-estagio.vue'
 import DetalhamentoProcessoEstagio from '../views/detalhamento-processo-estagio/detalhamento-processo-estagio.vue';
+import FormTCE from '../views/FormTCE/form-tce.vue'
+
 
 
 export const privateRoutes = [
@@ -48,6 +50,11 @@ export const privateRoutes = [
             path:'/detalhamento/processo/:id',
             name:'detalhamentoProcessoEstagio',
             component: DetalhamentoProcessoEstagio
+          },
+          {
+            path:'/formulario/tce',
+            name:'formulariotce',
+            component: FormTCE
           },
         ]
       },
